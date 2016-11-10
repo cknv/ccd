@@ -1,9 +1,9 @@
 package main
 
 import (
+	"io/ioutil"
 	"log"
 	"net/http"
-	"io/ioutil"
 	"time"
 )
 
@@ -23,7 +23,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Println("size of file:", len(data))
+	fileSize := float64(len(data))
+	log.Println("size of file:", fileSize)
 
-	log.Println("time taken:", time.Since(start))
+	elapsed := float64(time.Since(start).Seconds())
+	log.Println("time taken:", elapsed)
+
+	log.Println("speed is:", fileSize / elapsed, "bytes/second")
 }
